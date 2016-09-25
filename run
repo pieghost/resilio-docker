@@ -1,0 +1,13 @@
+#!/bin/bash
+
+mkdir -p ${STORAGE_PATH} ${DIRECTORY_ROOT}
+
+if [ -z "${SYNC_SECRET}" ]; then
+  echo "SYNC_SECRET not set, exiting..."
+  exit 1
+fi
+
+sed -i -- "s/SYNC_SECRET/${SYNC_SECRET}/g" /etc/rslsync.conf
+
+exec rslsync $*
+
